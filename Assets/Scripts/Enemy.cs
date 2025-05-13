@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
     public float health = 10f;
     public float damage = 1f;
@@ -29,7 +29,6 @@ public class Enemy : MonoBehaviour
     }
 
     IEnumerator DamageFlash(){
-        Debug.Log("Damage Flash Coroutine");
         float duration = 0.3f;
         float t = 0;
         while(t < duration){

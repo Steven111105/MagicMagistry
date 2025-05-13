@@ -5,13 +5,17 @@ using UnityEngine.UIElements;
 
 public class PlayerDash : MonoBehaviour
 {
+    PlayerMovement playerMovement;
     Rigidbody2D rb;
     public float dashSpeed;
+    public float dashLength;
+    public float dashCooldown;
     public bool canDash;
     public bool isDashing;
     Vector2 movement;
     private void Start()
     {
+        playerMovement = GetComponent<PlayerMovement>();
         rb = GetComponent<Rigidbody2D>();
         canDash = true;
     }
@@ -27,5 +31,24 @@ public class PlayerDash : MonoBehaviour
                 Dash();
             }
         }
+    }
+
+    void Dash(){
+        canDash = false;
+        isDashing = true;
+        playerMovement.canMove = false;
+        rb.velocity = movement.normalized * dashSpeed;
+        Invoke("StopDash", dashLength);
+        Invoke("DashCooldown", dashCooldown);
+    }
+
+    void StopDash(){
+        rb.velocity = Vector2.zero;
+        playerMovement.canMove = true;
+        isDashing = false;
+    }
+
+    void DashCooldown(){
+        canDash = true;
     }
 }
