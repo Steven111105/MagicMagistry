@@ -1,7 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 
 public class Slash : MonoBehaviour
@@ -13,7 +10,7 @@ public class Slash : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.gameObject.GetComponent<Enemy>()?.TakeDamage(damage);
+        collision.gameObject.GetComponent<Enemy>()?.TakeDamage(damage, transform,10f);
         collision.gameObject.GetComponent<Projectile>()?.Reflect(transform.localEulerAngles.z);
     }
 

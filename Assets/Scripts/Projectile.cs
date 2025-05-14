@@ -48,7 +48,7 @@ public class Projectile : MonoBehaviour
         if(isReflectable && isEnemyProjectile){
             //scuffed maths to reflect the buller according to the slash angle
             transform.localEulerAngles = new Vector3(0, 0, angle+90f);  
-            angle = angle * Mathf.Deg2Rad;
+            angle *= Mathf.Deg2Rad;
             Vector2 direction = -new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
             rb.velocity =  direction * speed;
             isEnemyProjectile = false;
