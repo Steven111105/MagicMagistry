@@ -10,11 +10,15 @@ public class PlayerAttack : MonoBehaviour
     bool canSlash = true;
     public bool allowSlash = true;
     Vector2 slashDirection;
+    AudioSource audioSource;
+    [SerializeField] AudioClip slashSound;
+    [SerializeField] AudioClip reflectSound;
     // Start is called before the first frame update
     void Start()
     {
         allowSlash = true;
         canSlash = true;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

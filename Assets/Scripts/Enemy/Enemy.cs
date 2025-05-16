@@ -3,6 +3,7 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
+    public Transform player;
     SpriteRenderer sr;
     public Rigidbody2D rb;
     [SerializeField] protected float speed;

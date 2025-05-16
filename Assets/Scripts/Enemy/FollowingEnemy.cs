@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class FollowingEnemy : Enemy
 {
-    public Transform player;
     bool canAttack = true;
     [SerializeField] float attackCooldown = 1f;
 

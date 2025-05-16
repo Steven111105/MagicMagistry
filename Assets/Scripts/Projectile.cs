@@ -10,18 +10,19 @@ public class Projectile : MonoBehaviour
     public float damage;
     public bool isEnemyProjectile;
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         rb = GetComponent<Rigidbody2D>();
-        Shoot(Vector2.right, speed, isReflectable, damage);
     }
 
-    public void Shoot(Vector2 direction, float speed, bool isReflectable,float damage)
+    public void Shoot(Vector2 direction, float speed, bool isReflectable, float damage, bool isEnemyProjectile = true)
     {
-        transform.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg-90f);
+        transform.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f);
         rb.velocity = direction.normalized * speed;
+        this.speed = speed;
         this.isReflectable = isReflectable;
         this.damage = damage;
+        this.isEnemyProjectile = isEnemyProjectile;
     }
 
     // Update is called once per frame
@@ -32,26 +33,32 @@ public class Projectile : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        if(!(collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Enemy"))){
+            //if its not colliding with player or enemy, ignore
+            return;
+        }
         Debug.Log("bullet collided with " + collision.gameObject.name);
         if(!isEnemyProjectile){
+            //Not enemy projectile, so its from player
             collision.gameObject.GetComponent<Enemy>()?.TakeDamage(damage);
             Destroy(gameObject);
         }else{
             //if not dashing, dont destroy the bullet/take damage
-            if(!collision.gameObject.GetComponent<PlayerDash>().isDashing){
+            if(collision.gameObject.GetComponent<PlayerDash>()?.isDashing == false){
                 collision.gameObject.GetComponent<PlayerStats>()?.TakeDamage(damage);
                 Destroy(gameObject);
             }
         }
     }
     public void Reflect(float angle){
-        if(isReflectable && isEnemyProjectile){
+        if (isReflectable && isEnemyProjectile)
+        {
             //scuffed maths to reflect the buller according to the slash angle
-            transform.localEulerAngles = new Vector3(0, 0, angle+90f);  
+            transform.localEulerAngles = new Vector3(0, 0, angle + 90f);
             angle *= Mathf.Deg2Rad;
             Vector2 direction = -new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-            rb.velocity =  direction * speed;
-            isEnemyProjectile = false;
+            rb.velocity = direction.normalized * speed;
+            this.isEnemyProjectile = false;
         }
     }
 }
