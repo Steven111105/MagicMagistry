@@ -114,7 +114,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 7
+        y: 21
         width: 32
         height: 7
       alignment: 0
@@ -135,7 +135,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 14
         width: 32
         height: 7
       alignment: 0
@@ -147,6 +147,48 @@ TextureImporter:
       bones: []
       spriteID: cd1c77c4f5ca65d459503441df823436
       internalID: 1403591975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealthBarTemp_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 7
+        width: 32
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdaf5ca6c2478724d833385ae0545a2e
+      internalID: -209799192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealthBarTemp_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c07cd61a6379b44fac444ab192a9590
+      internalID: -1455489660
       vertices: []
       indices: 
       edges: []
@@ -164,6 +206,8 @@ TextureImporter:
     nameFileIdTable:
       HealthBarTemp_0: 678641135
       HealthBarTemp_1: 1403591975
+      HealthBarTemp_2: -209799192
+      HealthBarTemp_3: -1455489660
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

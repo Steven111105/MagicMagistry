@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 5560336621468585039}
   - component: {fileID: 2238537174643034403}
   - component: {fileID: -313866291372530870}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: EnemyProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -166,7 +166,6 @@ MonoBehaviour:
   isReflectable: 1
   damage: 1
   isEnemyProjectile: 1
-  reflectSound: {fileID: 8300000, guid: 9296c75a559e36d468189ee348730940, type: 3}
 --- !u!82 &-313866291372530870
 AudioSource:
   m_ObjectHideFlags: 0

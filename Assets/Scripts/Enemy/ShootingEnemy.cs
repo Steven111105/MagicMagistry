@@ -1,43 +1,59 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShootingEnemy : Enemy
 {
-    [SerializeField] float shootingRange = 5f;
-    [SerializeField] float shootingCooldown = 1f;
+    [SerializeField] public float shootingRange = 10f;
+    float approachRange;
+    [SerializeField] public float shootingCooldown = 1f;
     float shootProgress;
-    [SerializeField] float bulletSpeed = 10f;
-    [SerializeField] float bulletDamage = 5f;
-    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] public float bulletSpeed = 10f;
+    [SerializeField] public float bulletDamage;
+    [SerializeField] public GameObject bulletPrefab;
     bool isWaiting = false;
+    void OnEnable()
+    {
+        //basically get closer to the player, not just on the edge of range
+        approachRange = shootingRange * 0.6f;
+        bulletDamage = damage;
+    }
+
     // Update is called once per frame
     void Update(){
         //if distance not in range, move towards player
-        if (Vector3.Distance(transform.position, player.position) > shootingRange)
-        {
-            if (isWaiting)
-            {
-                shootProgress = 0;
-            }
+        if(CanPrepareShoot(isWaiting)){
+            isWaiting = true;
+            PrepareShoot();
+        }else{
             isWaiting = false;
+            shootProgress = 0;
             Move();
         }
-        else
-        {
-            rb.velocity = Vector2.zero; // Stop the enemy's movement
-            if (isWaiting)
-            {
-                shootProgress += Time.deltaTime;
-                if (shootProgress >= shootingCooldown)
-                {
-                    Shoot();
-                    shootProgress = 0;
-                }
-            }
-            isWaiting = true;
+    }
+
+    bool CanPrepareShoot(bool isWaiting){
+        float distance = Vector3.Distance(transform.position, player.position);
+        if(isWaiting){
+            //is waiting means it has prepared a shoot so check within shooting range
+            return distance <= shootingRange;
+        }else{
+            //not preparing shoot, so it needs to get inside approach range
+            return distance <= approachRange;
         }
     }
+
+    void PrepareShoot(){
+        rb.velocity = Vector2.zero; // Stop the enemy's movement
+        shootProgress += Time.deltaTime;
+        if (shootProgress >= shootingCooldown)
+        {
+            Shoot();
+            shootProgress = 0;
+        }
+    }
+
 
     public override void Move(){
         if (player != null)
@@ -51,7 +67,7 @@ public class ShootingEnemy : Enemy
     {
         // Instantiate the bullet
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-        bullet.GetComponent<Projectile>().Shoot((player.position - transform.position).normalized, bulletSpeed, true, bulletDamage);
+        bullet.GetComponent<Projectile>().Shoot((player.position - transform.position).normalized, bulletSpeed, true, damage);
     }
         
 }

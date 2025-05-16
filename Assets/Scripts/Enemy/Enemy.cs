@@ -4,19 +4,17 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     public Transform player;
-    SpriteRenderer sr;
+    public SpriteRenderer sr;
     public Rigidbody2D rb;
-    [SerializeField] protected float speed;
-    [SerializeField] protected float health;
-    [SerializeField] protected float damage;
-    [SerializeField] protected bool isTakingKnockback;
+    [SerializeField] public float speed;
+    [SerializeField] public float health;
+    [SerializeField] public float damage;
+    [SerializeField] public bool isTakingKnockback;
     [Header("Resistance is a float between 0 and 1 (Percentage)")]
     [Tooltip("0.3 is 30% kb resistance")]
-    [SerializeField] protected float knockbackResistance = 0.5f; 
+    [SerializeField] public float knockbackResistance = 0.5f; 
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    public void Setup(){
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
     }
@@ -27,14 +25,14 @@ public abstract class Enemy : MonoBehaviour
     {
         if(source != null)
         {
-            Debug.Log("Knockback from " + source.name);
+            // Debug.Log("Knockback from " + source.name);
             Vector3 direction = (transform.position-source.position).normalized;
             // Add knockback effect here if needed
             StopCoroutine(nameof(ApplyKnockback));
             StartCoroutine(ApplyKnockback(direction, knockbackForce, knockbackResistance, 0.2f));
         }
         // Handle enemy taking damage here
-        Debug.Log("Enemy took " + damage + " damage!");
+        // Debug.Log("Enemy took " + damage + " damage!");
         health -= damage;
         StopCoroutine(nameof(DamageFlash));
         StartCoroutine(DamageFlash());
@@ -49,7 +47,7 @@ public abstract class Enemy : MonoBehaviour
             timer += Time.deltaTime ;
             yield return null;
         }
-        Debug.Log("Knockback ended");
+        // Debug.Log("Knockback ended");
         isTakingKnockback = false; // Re-enable movement after knockback
     }
        
@@ -76,7 +74,7 @@ public abstract class Enemy : MonoBehaviour
     void Die()
     {
         // Handle enemy death here
-        Debug.Log("Enemy died!");
+        // Debug.Log("Enemy died!");
         Destroy(gameObject);
     }
 }

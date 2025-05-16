@@ -38,7 +38,21 @@ public class PlayerAttack : MonoBehaviour
         slashDirection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
         GameObject slash = Instantiate(slashPrefab, transform);
         slash.transform.localEulerAngles = new Vector3(0,0, Mathf.Atan2(slashDirection.y, slashDirection.x) * Mathf.Rad2Deg + 180f);
+        SlashAudio();
         yield return new WaitForSeconds(slashCooldown);
         canSlash = true;
+    }
+
+    public void ReflectAudio(){
+        // Debug.Log("Reflecting");
+        float randomPitch = Random.Range(0.8f, 1.2f);
+        audioSource.pitch = randomPitch;
+        audioSource.PlayOneShot(reflectSound);
+    }
+
+    public void SlashAudio(){
+        float randomPitch = Random.Range(0.8f, 1.2f);
+        audioSource.pitch = randomPitch;
+        audioSource.PlayOneShot(slashSound);
     }
 }

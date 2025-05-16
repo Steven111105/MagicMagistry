@@ -18,6 +18,8 @@ public class PlayerDash : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         rb = GetComponent<Rigidbody2D>();
         canDash = true;
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("EnemyProjectile"), false);
     }
 
     void Update()
@@ -27,7 +29,7 @@ public class PlayerDash : MonoBehaviour
         movement.y = Input.GetAxisRaw("Vertical");
         if(canDash){
             if(movement != Vector2.zero && Input.GetKeyDown(KeyCode.Space)){
-                Debug.Log("Dashing");
+                // Debug.Log("Dashing");
                 Dash();
             }
         }
@@ -38,6 +40,8 @@ public class PlayerDash : MonoBehaviour
         isDashing = true;
         playerMovement.canMove = false;
         rb.velocity = movement.normalized * dashSpeed;
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("EnemyProjectile"), true);
         Invoke("StopDash", dashLength);
         Invoke("DashCooldown", dashCooldown);
     }
@@ -46,6 +50,8 @@ public class PlayerDash : MonoBehaviour
         rb.velocity = Vector2.zero;
         playerMovement.canMove = true;
         isDashing = false;
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("EnemyProjectile"), false);
     }
 
     void DashCooldown(){

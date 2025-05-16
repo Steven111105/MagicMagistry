@@ -31,7 +31,7 @@ public class FollowingEnemy : Enemy
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Enemy collided with player");
+            // Debug.Log("Enemy collided with player");
             collision.gameObject.GetComponent<PlayerStats>()?.TakeDamage(damage);
             canAttack = false;
             rb.velocity = Vector2.zero; // Stop the enemy's movement
