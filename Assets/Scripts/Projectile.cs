@@ -40,15 +40,21 @@ public class Projectile : MonoBehaviour
     }
 
     void SetTagAndLayer(){
-        if(isEnemyProjectile){
-            gameObject.layer = LayerMask.NameToLayer("EnemyProjectile");
-            gameObject.tag = "EnemyProjectile";
-            sr.color = Color.red;
+        if (isReflectable)
+        {    
+            if (isEnemyProjectile)
+            {
+                gameObject.layer = LayerMask.NameToLayer("EnemyProjectile");
+                gameObject.tag = "EnemyProjectile";
+                sr.color = Color.red;
 
-        }else{
-            gameObject.layer = LayerMask.NameToLayer("PlayerProjectile");
-            gameObject.tag = "PlayerProjectile";
-            sr.color = Color.yellow;
+            }
+            else
+            {
+                gameObject.layer = LayerMask.NameToLayer("PlayerProjectile");
+                gameObject.tag = "PlayerProjectile";
+                sr.color = Color.yellow;
+            }
         }
     }
 
@@ -104,14 +110,11 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    public void Reflect(float angle){
+    public void Reflect(Vector2 lookDirection){
         if (isReflectable && isEnemyProjectile)
         {
-            //scuffed maths to reflect the buller according to the slash angle
-            transform.localEulerAngles = new Vector3(0, 0, angle + 90f);
-            angle *= Mathf.Deg2Rad;
-            Vector2 direction = -new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-            rb.velocity = direction.normalized * speed;
+            rb.velocity = lookDirection.normalized * speed;
+            transform.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90f);
             isEnemyProjectile = false;
             damage = 1f;
         }

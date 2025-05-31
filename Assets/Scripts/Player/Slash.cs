@@ -14,7 +14,7 @@ public class Slash : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         collision.gameObject.GetComponent<Enemy>()?.TakeDamage(damage, transform,10f);
-        collision.gameObject.GetComponent<Projectile>()?.Reflect(transform.localEulerAngles.z);
+        collision.gameObject.GetComponent<Projectile>()?.Reflect(transform.parent.up);
         if(collision.gameObject.CompareTag("EnemyProjectile"))
         {
             playerAttack.ReflectAudio();
