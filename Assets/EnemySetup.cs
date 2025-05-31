@@ -21,7 +21,7 @@ public class EnemySetup : MonoBehaviour
                 health = 5 + (waveNumber * 2);
                 speed = 2;
                 damage = 5 + (waveNumber / 2);
-                float shootingRange = 5f + (waveNumber * 0.5f);
+                float shootingRange = 12f;
                 float shootingCooldown = 1f;
                 float bulletSpeed = 6f;
                 SetupShootingEnemy(spawner.player, health, speed, damage, shootingRange, shootingCooldown, bulletSpeed);

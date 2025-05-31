@@ -54,18 +54,29 @@ public class Projectile : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(!(collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Enemy"))){
+        if(!(collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Wall"))){
             //if its not colliding with player or enemy, ignore
             return;
         }
+        // Debug.Log("bullet collided with " + collision.gameObject.name);
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            //if its colliding with wall, destroy the bullet
+            Destroy(gameObject);
+            return;
+        }
 
-        if(!isEnemyProjectile){
+        if (!isEnemyProjectile)
+        {
             //Not enemy projectile, so its from player
-            if(collision.gameObject.CompareTag("Enemy")){
+            if (collision.gameObject.CompareTag("Enemy"))
+            {
                 collision.gameObject.GetComponent<Enemy>()?.TakeDamage(damage);
                 Destroy(gameObject);
             }
-        }else{
+        }
+        else
+        {
             //if not dashing, dont destroy the bullet/take damage
             collision.gameObject.GetComponent<PlayerStats>()?.TakeDamage(damage);
             Destroy(gameObject);

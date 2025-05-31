@@ -18,14 +18,15 @@ public class ShootingEnemy : Enemy
         //basically get closer to the player, not just on the edge of range
         approachRange = shootingRange * 0.6f;
         bulletDamage = damage;
+        isWaiting = false;
     }
 
     // Update is called once per frame
     void Update(){
         //if distance not in range, move towards player
-        if(CanPrepareShoot(isWaiting)){
-            isWaiting = true;
+        if(!NeedToMove(isWaiting)){
             PrepareShoot();
+            isWaiting = true;
         }else{
             isWaiting = false;
             shootProgress = 0;
@@ -33,14 +34,14 @@ public class ShootingEnemy : Enemy
         }
     }
 
-    bool CanPrepareShoot(bool isWaiting){
+    bool NeedToMove(bool isWaiting){
         float distance = Vector3.Distance(transform.position, player.position);
         if(isWaiting){
             //is waiting means it has prepared a shoot so check within shooting range
-            return distance <= shootingRange;
+            return distance >= shootingRange;
         }else{
             //not preparing shoot, so it needs to get inside approach range
-            return distance <= approachRange;
+            return distance >= approachRange;
         }
     }
 

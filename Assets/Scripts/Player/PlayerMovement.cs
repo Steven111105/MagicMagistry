@@ -19,10 +19,15 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(canMove){
+        if (canMove)
+        {
             movementInput.x = Input.GetAxisRaw("Horizontal");
             movementInput.y = Input.GetAxisRaw("Vertical");
             rb.velocity = movementInput.normalized * playerSpeed;
         }
+        Vector3 direction = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+        transform.localEulerAngles = new Vector3(0,0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f);
+
+        // Debug.Log(transform.up);
     }
 }
