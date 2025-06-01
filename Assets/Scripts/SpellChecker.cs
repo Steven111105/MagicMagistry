@@ -46,7 +46,9 @@ public class SpellChecker : MonoBehaviour
             ConfirmSpell();
             inputSequence.Clear();
             return;
-        }else if(currentInput == cancelCode){
+        }
+        else if (currentInput == cancelCode)
+        {
             Debug.Log("Cancelled");
             spellText.text = "";
             currentComponents.Clear();
@@ -59,18 +61,28 @@ public class SpellChecker : MonoBehaviour
         {
             if (currentInput == spell.Value)
             {
-                currentComponents.Add(spell.Key);
-                // Remove the length of the spell from the right of the text
-                spellText.text = spellText.text.Substring(0, spellText.text.Length - spell.Value.Length);
+                if (currentComponents.Count != 3)
+                {
+                    currentComponents.Add(spell.Key);
+                    // Remove the length of the spell from the right of the text
+                    spellText.text = spellText.text.Substring(0, spellText.text.Length - spell.Value.Length);
 
-                // Replace it with the name of the spell
-                if(currentComponents.Count != 1){
-                    spellText.text += " +";
+                    // Replace it with the name of the spell
+                    if (currentComponents.Count != 1)
+                    {
+                        spellText.text += " +";
+                    }
+                    spellText.text += " " + spell.Key;
+                    Debug.Log("Added component: " + spell.Key);
+                    inputSequence.Clear();
+                    return;
                 }
-                spellText.text += " " + spell.Key;
-                Debug.Log("Added component: " + spell.Key);
-                inputSequence.Clear();
-                return;
+                else
+                {
+                    spellText.text = spellText.text.Substring(0, spellText.text.Length - spell.Value.Length);
+                    inputSequence.Clear();
+                    ShowFullSpellUI();
+                }
             }
             if (!IsPrefixOfAnySpell(currentInput))
             {
@@ -113,6 +125,11 @@ public class SpellChecker : MonoBehaviour
 
         spellText.text = "";
         currentComponents.Clear();
+    }
+    
+    void ShowFullSpellUI()
+    {
+        return;
     }
 }
 

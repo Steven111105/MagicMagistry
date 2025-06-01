@@ -64,6 +64,11 @@ public class SpellCaster : MonoBehaviour
                         wall.GetComponent<Rigidbody2D>().velocity = wall.transform.up * 7f;
                     }
                 }
+                foreach (GameObject wall in walls)
+                {
+                    // Set the wall to be a shield
+                    wall.transform.rotation = Quaternion.identity;
+                }
             }
             else
             {
@@ -77,12 +82,20 @@ public class SpellCaster : MonoBehaviour
         {
             if (moveCount != 0)
             {
-                GameObject fireball = Instantiate(fireProjectilePrefab, transform.position, Quaternion.identity);
+                //fireball
+                GameObject fireball = Instantiate(fireProjectilePrefab, playerTransform.position, Quaternion.Euler(0, 0, playerTransform.rotation.eulerAngles.z));
+                Debug.Log("Player angle" + playerTransform.rotation.eulerAngles.z);
+                Debug.Log("Casting Fireball, angle" + fireball.transform.rotation.eulerAngles.z);
                 // Instantiate the bullet
-                fireball.GetComponent<Projectile>().Shoot(transform.up, 3f, false, 5f, false);
+                fireball.GetComponent<Projectile>().Shoot(transform.up, 5f, false, 5f, false);
                 if (fireCount == 2)
                 {
-                    fireball.transform.localScale = new Vector3(2f, 2f, 1f);
+                    fireball.transform.localScale = new Vector3(1.5f, 1.5f, 1f);
+                    fireball.GetComponent<Fireball>().SetupSize(2);
+                }
+                else
+                {
+                    fireball.GetComponent<Fireball>().SetupSize(1);
                 }
             }
             else
@@ -91,11 +104,11 @@ public class SpellCaster : MonoBehaviour
                 GameObject firePuddle = Instantiate(firePoolPrefab, playerTransform.position + playerTransform.up * 2f, playerTransform.rotation);
                 if (fireCount == 2)
                 {
-                    firePuddle.transform.localScale = new Vector3(2f, 2f, 1f);
+                    firePuddle.transform.localScale = new Vector3(2.5f, 2.5f, 1f);
                 }
                 else if (fireCount == 3)
                 {
-                    firePuddle.transform.localScale = new Vector3(3f, 3f, 1f);
+                    firePuddle.transform.localScale = new Vector3(3.5f, 3.5f, 1f);
                 }
             }
         }

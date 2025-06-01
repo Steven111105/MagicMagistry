@@ -53,7 +53,7 @@ public abstract class Enemy : MonoBehaviour
        
 
     IEnumerator DamageFlash(){
-        float duration = 0.3f;
+        float duration = 0.1f;
         float t = 0;
         while(t < duration){
             sr.color = new Color(255,0,0);
