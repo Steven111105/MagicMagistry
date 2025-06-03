@@ -8,7 +8,12 @@ public class EnemySpawner : MonoBehaviour
     float roundTimer;
     public int waveNumber;
     [SerializeField] GameObject enemyPrefab;
+    [SerializeField] public Sprite chaseEnemySprite;
+    [SerializeField] public Sprite shootingEnemySprite;
+    [SerializeField] public Sprite slimeEnemySprite;
     public GameObject bulletPrefab;
+    public GameObject damageTextPrefab;
+    public float spawnRange = 15f;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,15 +29,24 @@ public class EnemySpawner : MonoBehaviour
 
     void StartWave(){
         waveNumber++;
-        int enemyCount = waveNumber * 2;
+        int enemyCount = Mathf.RoundToInt(waveNumber * 1.5f);
         for (int i = 0; i < enemyCount; i++)
         {
-            Vector2 spawnPos =  (Vector2)player.position + Random.insideUnitCircle.normalized*10f;
+            Vector2 spawnPos = (Vector2)player.position + Random.insideUnitCircle.normalized * spawnRange;
             GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
             // int enemyType = Random.Range(0, 2);
             int enemyType = 1;
             enemy.GetComponent<EnemySetup>().spawner = this;
             enemy.GetComponent<EnemySetup>().SetupEnemy(enemyType);
+        }
+        int slimeCount = waveNumber / 5;
+        // slimeCount = 1;
+        for (int i = 0; i < slimeCount; i++)
+        {
+            Vector2 spawnPos = (Vector2)player.position + Random.insideUnitCircle.normalized * spawnRange;
+            GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+            enemy.GetComponent<EnemySetup>().spawner = this;
+            enemy.GetComponent<EnemySetup>().SetupEnemy(2); // Assuming 2 is the type for SlimeEnemy
         }
         StartCoroutine(WaveTimer());
     }

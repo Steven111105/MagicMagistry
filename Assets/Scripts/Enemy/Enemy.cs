@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
@@ -6,6 +7,7 @@ public abstract class Enemy : MonoBehaviour
     public Transform player;
     public SpriteRenderer sr;
     public Rigidbody2D rb;
+    public GameObject damageTextPrefab;
     [SerializeField] public float speed;
     [SerializeField] public float health;
     [SerializeField] public float damage;
@@ -13,20 +15,22 @@ public abstract class Enemy : MonoBehaviour
     [Header("Resistance is a float between 0 and 1 (Percentage)")]
     [Tooltip("0.3 is 30% kb resistance")]
     [SerializeField] public float knockbackResistance = 0.5f; 
+    [SerializeField] protected bool flashing = false;
 
-    public void Setup(){
+    public virtual void OnEnable()
+    {
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
     }
 
     public abstract void Move();
-    
+
     public void TakeDamage(float damage, Transform source = null, float knockbackForce = 0)
     {
-        if(source != null)
+        if (source != null)
         {
             // Debug.Log("Knockback from " + source.name);
-            Vector3 direction = (transform.position-source.position).normalized;
+            Vector3 direction = (transform.position - source.position).normalized;
             // Add knockback effect here if needed
             StopCoroutine(nameof(ApplyKnockback));
             StartCoroutine(ApplyKnockback(direction, knockbackForce, knockbackResistance, 0.2f));
@@ -34,8 +38,17 @@ public abstract class Enemy : MonoBehaviour
         // Handle enemy taking damage here
         // Debug.Log("Enemy took " + damage + " damage!");
         health -= damage;
+        ShowDamageText(damage);
         StopCoroutine(nameof(DamageFlash));
+        sr.color = new Color(255, 255, 255); // Reset color to white
         StartCoroutine(DamageFlash());
+    }
+
+    void ShowDamageText(float damage)
+    {
+        GameObject damageText = Instantiate(damageTextPrefab,Vector2.zero, Quaternion.identity, transform.GetChild(0));
+        damageText.GetComponent<TMP_Text>().text = damage.ToString();
+        damageText.transform.localPosition = new Vector3(0, 0.5f, 0);
     }
     IEnumerator ApplyKnockback(Vector3 direction, float knockbackForce, float knockbackResistance, float duration)
     {
@@ -50,9 +63,9 @@ public abstract class Enemy : MonoBehaviour
         // Debug.Log("Knockback ended");
         isTakingKnockback = false; // Re-enable movement after knockback
     }
-       
 
     IEnumerator DamageFlash(){
+        flashing = true;
         float duration = 0.1f;
         float t = 0;
         while(t < duration){
@@ -66,15 +79,15 @@ public abstract class Enemy : MonoBehaviour
             t += Time.deltaTime;
             yield return null;
         }
-        if(health < 0){
+        flashing = false;
+        if(health <= 0){
             Die();
         }
     }
 
-    void Die()
+    public virtual void Die()
     {
-        // Handle enemy death here
-        // Debug.Log("Enemy died!");
+        speed = 0;
         Destroy(gameObject);
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Fireball : MonoBehaviour
 {
-    public float damage = 1;
+    public float damage = 10f;
     public int level;
     public float size = 1f; // Size of the fireball
     public GameObject explosionEffectPrefab;
@@ -34,7 +34,7 @@ public class Fireball : MonoBehaviour
             if (hitCollider.CompareTag("Enemy"))
             {
                 // Assuming the enemy has a method to take damage
-                hitCollider.GetComponent<Enemy>()?.TakeDamage(10);
+                hitCollider.GetComponent<Enemy>()?.TakeDamage(damage);
             }
         }
         GameObject explosion = Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);

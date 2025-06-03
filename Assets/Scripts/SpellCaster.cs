@@ -84,18 +84,20 @@ public class SpellCaster : MonoBehaviour
             {
                 //fireball
                 GameObject fireball = Instantiate(fireProjectilePrefab, playerTransform.position, Quaternion.Euler(0, 0, playerTransform.rotation.eulerAngles.z));
-                Debug.Log("Player angle" + playerTransform.rotation.eulerAngles.z);
-                Debug.Log("Casting Fireball, angle" + fireball.transform.rotation.eulerAngles.z);
+                // Debug.Log("Player angle" + playerTransform.rotation.eulerAngles.z);
+                // Debug.Log("Casting Fireball, angle" + fireball.transform.rotation.eulerAngles.z);
                 // Instantiate the bullet
-                fireball.GetComponent<Projectile>().Shoot(transform.up, 5f, false, 5f, false);
+                fireball.GetComponent<Projectile>().Shoot(transform.up, 5f, false, 0, false);
                 if (fireCount == 2)
                 {
                     fireball.transform.localScale = new Vector3(1.5f, 1.5f, 1f);
                     fireball.GetComponent<Fireball>().SetupSize(2);
+                    fireball.GetComponent<Fireball>().damage = 20f;
                 }
                 else
                 {
                     fireball.GetComponent<Fireball>().SetupSize(1);
+                    fireball.GetComponent<Fireball>().damage = 10f;
                 }
             }
             else

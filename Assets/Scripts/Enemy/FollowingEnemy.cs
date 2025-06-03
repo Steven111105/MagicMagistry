@@ -10,13 +10,22 @@ public class FollowingEnemy : Enemy
     [SerializeField] float attackCooldown = 1f;
 
     // Update is called once per frame
+
     void Update()
     {
-        if(!isTakingKnockback){
-            if(canAttack){
+        if (!isTakingKnockback)
+        {
+            if (canAttack)
+            {
                 Move();
             }
         }
+        if (!flashing)
+        {
+            // Debug.Log("Enemy is not flashing, change to white");
+            sr.color = new Color(255, 255, 255); // Reset color to white
+        }
+        
     }
     public override void Move()
     {

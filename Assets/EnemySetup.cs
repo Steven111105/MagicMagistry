@@ -1,23 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EnemySetup : MonoBehaviour
 {
     public EnemySpawner spawner;
     int waveNumber;
+    public Sprite sprite;
     public void SetupEnemy(int enemyType)
     {
         waveNumber = spawner.waveNumber;
         switch (enemyType)
         {
             case 0:
-                int health = 10 + (waveNumber * 2);
-                int speed = 3;
-                int damage = 1 + (waveNumber / 2);
+                sprite = spawner.chaseEnemySprite;
+                float health = 10 + Mathf.RoundToInt(waveNumber * 1.3f);
+                float speed = 3;
+                float damage = 1 + (waveNumber / 2);
                 SetupChaseEnemy(spawner.player, health, speed, damage);
                 break;
             case 1:
+                sprite = spawner.shootingEnemySprite;
                 health = 5 + (waveNumber * 2);
                 speed = 2;
                 damage = 5 + (waveNumber / 2);
@@ -26,29 +30,39 @@ public class EnemySetup : MonoBehaviour
                 float bulletSpeed = 6f;
                 SetupShootingEnemy(spawner.player, health, speed, damage, shootingRange, shootingCooldown, bulletSpeed);
                 break;
+            case 2:
+                sprite = spawner.slimeEnemySprite;
+                health = 15 + (waveNumber * 10);
+                speed = 1.5f;
+                damage = 2 + (waveNumber / 2);
+                float moveDuration = 0.5f;
+                float moveCooldown = 0.5f;
+                SetupSlimeEnemy(spawner.player, health, speed, damage, moveDuration, moveCooldown, 2);
+                break;
             default:
                 Debug.LogError("Invalid enemy type");
                 break;
         }
+        GetComponent<SpriteRenderer>().sprite = sprite;
     }
     public void SetupChaseEnemy(Transform player, float health, float speed, float damage)
     {
         gameObject.AddComponent<FollowingEnemy>();
         Enemy enemy = gameObject.GetComponent<FollowingEnemy>();
-        enemy.Setup();
-        enemy.sr.color = Color.blue;
+        // enemy.sr.color = Color.blue;
         enemy.player = player;
         enemy.health = health;
         enemy.speed = speed;
         enemy.damage = damage;
+        enemy.damageTextPrefab = spawner.damageTextPrefab;
     }
 
-    public void SetupShootingEnemy(Transform player, float health, float speed, float damage, 
-                                float shootingRange, float shootingCooldown, float bulletSpeed){
+    public void SetupShootingEnemy(Transform player, float health, float speed, float damage,
+                                float shootingRange, float shootingCooldown, float bulletSpeed)
+    {
         gameObject.AddComponent<ShootingEnemy>();
         ShootingEnemy enemy = gameObject.GetComponent<ShootingEnemy>();
-        enemy.Setup();
-        enemy.sr.color = Color.green;
+        // enemy.sr.color = Color.green;
         enemy.player = player;
         enemy.health = health;
         enemy.speed = speed;
@@ -57,5 +71,31 @@ public class EnemySetup : MonoBehaviour
         enemy.shootingCooldown = shootingCooldown;
         enemy.bulletSpeed = bulletSpeed;
         enemy.bulletPrefab = spawner.bulletPrefab;
+        enemy.damageTextPrefab = spawner.damageTextPrefab;
+    }
+
+    public void SetupSlimeEnemy(Transform player, float health, float speed, float damage,
+                                float moveDuration, float moveCooldown, float size)
+    {
+        if (gameObject.GetComponent<SlimeEnemy>() != null)
+        {
+            Destroy(gameObject.GetComponent<SlimeEnemy>());
+        }
+
+        SlimeEnemy enemy = gameObject.AddComponent<SlimeEnemy>(); ;
+        // enemy.sr.color = Color.yellow;
+        enemy.maxHealth = health;
+        enemy.player = player;
+        enemy.health = health;
+        enemy.speed = speed;
+        enemy.damage = damage;
+        enemy.moveDuration = moveDuration;
+        enemy.moveCooldown = moveCooldown;
+        enemy.size = size;
+        enemy.transform.localScale = new Vector3(size, size, 1); // Scale based on size
+        enemy.GetComponent<BoxCollider2D>().size = new Vector2(size, size); // Adjust collider size
+        float canvasSize = 0.02f / size;
+        transform.localScale = new Vector3(size, size, 1); // Scale the enemy object
+        enemy.damageTextPrefab = spawner.damageTextPrefab;
     }
 }

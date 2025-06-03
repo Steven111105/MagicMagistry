@@ -77,14 +77,20 @@ public class Projectile : MonoBehaviour
             //Not enemy projectile, so its from player
             if (collision.gameObject.CompareTag("Enemy"))
             {
-                collision.gameObject.GetComponent<Enemy>()?.TakeDamage(damage);
+                if (damage > 0)
+                {
+                    collision.gameObject.GetComponent<Enemy>()?.TakeDamage(damage);
+                }
                 Destroy(gameObject);
             }
         }
         else
         {
             //if not dashing, dont destroy the bullet/take damage
-            collision.gameObject.GetComponent<PlayerStats>()?.TakeDamage(damage);
+            if (damage > 0)
+            {
+                collision.gameObject.GetComponent<PlayerStats>()?.TakeDamage(damage);
+            }
             Destroy(gameObject);
         }
     }
@@ -98,13 +104,18 @@ public class Projectile : MonoBehaviour
         if(!isEnemyProjectile){
             //Not enemy projectile, so its from player
             if(collision.gameObject.CompareTag("Enemy")){
-                collision.gameObject.GetComponent<Enemy>()?.TakeDamage(damage);
+                if (damage > 0){
+                    collision.gameObject.GetComponent<Enemy>()?.TakeDamage(damage);
+                }
                 Destroy(gameObject);
             }
         }else{
             //if not dashing, dont destroy the bullet/take damage
             if(collision.gameObject.GetComponent<PlayerDash>()?.isDashing == false){
-                collision.gameObject.GetComponent<PlayerStats>()?.TakeDamage(damage);
+                if (damage > 0)
+                {
+                    collision.gameObject.GetComponent<PlayerStats>()?.TakeDamage(damage);
+                }
                 Destroy(gameObject);
             }
         }

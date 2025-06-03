@@ -70,9 +70,9 @@ public class SpellChecker : MonoBehaviour
                     // Replace it with the name of the spell
                     if (currentComponents.Count != 1)
                     {
-                        spellText.text += " +";
+                        spellText.text += " + ";
                     }
-                    spellText.text += " " + spell.Key;
+                    spellText.text += " " + spell.Key + " ";
                     Debug.Log("Added component: " + spell.Key);
                     inputSequence.Clear();
                     return;
