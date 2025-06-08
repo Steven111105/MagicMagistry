@@ -42,19 +42,26 @@ public class SpellCaster : MonoBehaviour
                 Debug.Log("Casting Shield Pillar");
                 // Add logic to create a shield pillar without move effect
                 //create 3 shield pillars in a row in front of player
-                GameObject shieldPillar = Instantiate(wallSpellPrefab, playerTransform.position + playerTransform.up, playerTransform.rotation);
+                GameObject shieldPillar = Instantiate(wallSpellPrefab, playerTransform.position + playerTransform.up*1.5f, playerTransform.rotation);
                 walls.Add(shieldPillar);
-                if (wallCount == 2)
+                if (wallCount >= 2)
                 {
                     GameObject shieldPillar2 = Instantiate(wallSpellPrefab, shieldPillar.transform.position - shieldPillar.transform.right, playerTransform.rotation);
                     GameObject shieldPillar3 = Instantiate(wallSpellPrefab, shieldPillar.transform.position + shieldPillar.transform.right, playerTransform.rotation);
                     walls.Add(shieldPillar2);
                     walls.Add(shieldPillar3);
+                    if (wallCount == 3)
+                    {
+                        shieldPillar.transform.position = playerTransform.position + playerTransform.up * 2;
+                        shieldPillar2.transform.position = shieldPillar.transform.position - shieldPillar.transform.right - shieldPillar.transform.up;
+                        shieldPillar3.transform.position = shieldPillar.transform.position + shieldPillar.transform.right - shieldPillar.transform.up;
+                        GameObject shieldPillar4 = Instantiate(wallSpellPrefab, shieldPillar.transform.position - shieldPillar.transform.right*2 - shieldPillar.transform.up * 2, playerTransform.rotation);
+                        GameObject shieldPillar5 = Instantiate(wallSpellPrefab, shieldPillar.transform.position + shieldPillar.transform.right*2- shieldPillar.transform.up * 2, playerTransform.rotation);
+                        walls.Add(shieldPillar4);
+                        walls.Add(shieldPillar5);
+                    }
                 }
-                else if (wallCount == 3)
-                {
-                    //make a semi circle in front of the player
-                }
+                
                 if (moveCount > 0)
                 {
                     foreach (GameObject wall in walls)
@@ -66,7 +73,6 @@ public class SpellCaster : MonoBehaviour
                 }
                 foreach (GameObject wall in walls)
                 {
-                    // Set the wall to be a shield
                     wall.transform.rotation = Quaternion.identity;
                 }
             }
@@ -104,13 +110,16 @@ public class SpellCaster : MonoBehaviour
             {
                 //puddle
                 GameObject firePuddle = Instantiate(firePoolPrefab, playerTransform.position + playerTransform.up * 2f, playerTransform.rotation);
+                firePuddle.GetComponent<FirePuddle>().damage = 1;
                 if (fireCount == 2)
                 {
                     firePuddle.transform.localScale = new Vector3(2.5f, 2.5f, 1f);
+                    firePuddle.GetComponent<FirePuddle>().damage = 2;
                 }
                 else if (fireCount == 3)
                 {
                     firePuddle.transform.localScale = new Vector3(3.5f, 3.5f, 1f);
+                    firePuddle.GetComponent<FirePuddle>().damage = 3;
                 }
             }
         }
@@ -121,7 +130,7 @@ public class SpellCaster : MonoBehaviour
                 Debug.Log("Casting Ice Ball");
                 GameObject iceBall = Instantiate(iceProjectilePrefab, playerTransform.position, Quaternion.Euler(0, 0, playerTransform.rotation.eulerAngles.z));
                 iceBall.GetComponent<Projectile>().Shoot(transform.up, 5f, false, 0, false);
-                if (fireCount == 2)
+                if (iceCount == 2)
                 {
                     iceBall.transform.localScale = new Vector3(1.5f, 1.5f, 1f);
                     iceBall.GetComponent<IceBall>().SetupSize(2);

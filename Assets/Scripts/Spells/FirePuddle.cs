@@ -6,6 +6,7 @@ public class FirePuddle : MonoBehaviour
 {
     [SerializeField] List<GameObject> enemies = new List<GameObject>();
     [SerializeField] List<float> puddleTimers = new List<float>();
+    public int damage;
 
     void OnEnable()
     {
@@ -25,7 +26,7 @@ public class FirePuddle : MonoBehaviour
             puddleTimers[i] += Time.deltaTime;
             if (puddleTimers[i] > 0.3f)
             {
-                enemies[i].GetComponent<Enemy>()?.TakeDamage(1f);
+                enemies[i].GetComponent<Enemy>()?.TakeDamage(damage);
                 puddleTimers[i] = 0f; // Reset timer after damage
             }
         }

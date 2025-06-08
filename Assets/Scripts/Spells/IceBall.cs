@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IceBall : MonoBehaviour
 {
-    public float damage = 10f;
+    public float damage = 5f;
     public int level;
     public float size = 1f; // Size of the fireball
     public GameObject explosionEffectPrefab;
@@ -34,6 +34,7 @@ public class IceBall : MonoBehaviour
             if (hitCollider.CompareTag("Enemy"))
             {
                 // Assuming the enemy has a method to take damage
+                hitCollider.GetComponent<Enemy>()?.TakeDamage(damage);
                 hitCollider.GetComponent<Enemy>()?.Freeze();
             }
         }

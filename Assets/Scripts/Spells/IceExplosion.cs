@@ -10,7 +10,7 @@ public class IceExplosion : MonoBehaviour
     }
     IEnumerator RemoveExplosion()
     {
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.1f);
         Destroy(gameObject);
     }
 }
