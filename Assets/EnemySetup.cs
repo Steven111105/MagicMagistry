@@ -55,6 +55,7 @@ public class EnemySetup : MonoBehaviour
         enemy.speed = speed;
         enemy.damage = damage;
         enemy.damageTextPrefab = spawner.damageTextPrefab;
+        enemy.currentSpeed = speed;
     }
 
     public void SetupShootingEnemy(Transform player, float health, float speed, float damage,
@@ -72,6 +73,7 @@ public class EnemySetup : MonoBehaviour
         enemy.bulletSpeed = bulletSpeed;
         enemy.bulletPrefab = spawner.bulletPrefab;
         enemy.damageTextPrefab = spawner.damageTextPrefab;
+        enemy.currentSpeed = speed;
     }
 
     public void SetupSlimeEnemy(Transform player, float health, float speed, float damage,
@@ -93,9 +95,9 @@ public class EnemySetup : MonoBehaviour
         enemy.moveCooldown = moveCooldown;
         enemy.size = size;
         enemy.transform.localScale = new Vector3(size, size, 1); // Scale based on size
-        enemy.GetComponent<BoxCollider2D>().size = new Vector2(size, size); // Adjust collider size
         float canvasSize = 0.02f / size;
         transform.localScale = new Vector3(size, size, 1); // Scale the enemy object
         enemy.damageTextPrefab = spawner.damageTextPrefab;
+        enemy.currentSpeed = speed;
     }
 }

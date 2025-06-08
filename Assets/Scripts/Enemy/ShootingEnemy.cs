@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class ShootingEnemy : Enemy
@@ -72,7 +68,7 @@ public class ShootingEnemy : Enemy
         if (player != null)
         {
             Vector3 direction = (player.position - transform.position).normalized;
-            rb.velocity = direction * speed;
+            rb.velocity = direction * currentSpeed;
         }
     }
 

@@ -155,9 +155,9 @@ MonoBehaviour:
   player: {fileID: 378611771}
   waveNumber: 0
   enemyPrefab: {fileID: 1722516329832681377, guid: 0dda033408189f148b9211013932d9ab, type: 3}
-  chaseEnemySprite: {fileID: -249058550, guid: ea620e434d8833543bbf6de706e73526, type: 3}
-  shootingEnemySprite: {fileID: -302811012, guid: ea620e434d8833543bbf6de706e73526, type: 3}
-  slimeEnemySprite: {fileID: -154318637, guid: ea620e434d8833543bbf6de706e73526, type: 3}
+  chaseEnemySprite: {fileID: -1907132503, guid: ea620e434d8833543bbf6de706e73526, type: 3}
+  shootingEnemySprite: {fileID: -1331207294, guid: ea620e434d8833543bbf6de706e73526, type: 3}
+  slimeEnemySprite: {fileID: -982054329, guid: ea620e434d8833543bbf6de706e73526, type: 3}
   bulletPrefab: {fileID: 2449860781893435578, guid: 91c6a97bbd498554bb71090336698347, type: 3}
   damageTextPrefab: {fileID: 5867458382482009802, guid: 70660d4c296a2f6409d359bfc908a440, type: 3}
   spawnRange: 15
@@ -464,7 +464,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 378611769}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfaa3926167294645a0a96b530bf7278, type: 3}
   m_Name: 
@@ -590,7 +590,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoolPrefab: {fileID: 6530193424605015221, guid: bea598bfebde66c48b937d45ce34d155, type: 3}
   fireProjectilePrefab: {fileID: 4053801260894667784, guid: 7fda6b39446aa1742a5f23948b0fa576, type: 3}
-  iceSpellPrefab: {fileID: 0}
+  iceSprayPrefab: {fileID: 4350695418744207588, guid: a3ceda197862dbf46b23dc17c58d5fb0, type: 3}
+  iceProjectilePrefab: {fileID: 4053801260894667784, guid: 1a5fbd54201a75e45a5a48f471bb9710, type: 3}
   wallSpellPrefab: {fileID: 3421507613710988475, guid: 74179dad03b0c534ab83ee577c38df18, type: 3}
 --- !u!114 &378611781
 MonoBehaviour:
@@ -1193,7 +1194,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: -88680131
   m_SortingOrder: 0

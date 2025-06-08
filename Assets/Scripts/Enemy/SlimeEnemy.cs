@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class SlimeEnemy : Enemy
 {
@@ -55,7 +52,7 @@ public class SlimeEnemy : Enemy
             if (player != null)
             {
                 Vector3 direction = (player.position - transform.position).normalized;
-                rb.velocity = direction * speed;
+                rb.velocity = direction * currentSpeed;
             }
         }
         else
@@ -133,7 +130,6 @@ public class SlimeEnemy : Enemy
             canAttack = false;
             Invoke(nameof(AllowAttack), attackCooldown);
         }
-
     }
 
     void AllowAttack()

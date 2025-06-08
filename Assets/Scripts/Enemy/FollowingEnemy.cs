@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
-using UnityEditor.Callbacks;
 using UnityEngine;
 
 public class FollowingEnemy : Enemy
@@ -32,7 +28,7 @@ public class FollowingEnemy : Enemy
         if (player != null)
         {
             Vector3 direction = (player.position - transform.position).normalized;
-            rb.velocity = direction * speed;
+            rb.velocity = direction * currentSpeed;
         }
     }
 

@@ -10,10 +10,10 @@ public class SpellCaster : MonoBehaviour
     int wallCount = 0;
     int moveCount = 0;
     string baseSpell;
-
     [SerializeField] private GameObject firePoolPrefab;
     [SerializeField] private GameObject fireProjectilePrefab;
-    [SerializeField] private GameObject iceSpellPrefab;
+    [SerializeField] private GameObject iceSprayPrefab;
+    [SerializeField] private GameObject iceProjectilePrefab;
     [SerializeField] private GameObject wallSpellPrefab;
 
     // Start is called before the first frame update
@@ -111,6 +111,44 @@ public class SpellCaster : MonoBehaviour
                 else if (fireCount == 3)
                 {
                     firePuddle.transform.localScale = new Vector3(3.5f, 3.5f, 1f);
+                }
+            }
+        }
+        else if (baseSpell == "Ice")
+        {
+            if (moveCount > 0)
+            {
+                Debug.Log("Casting Ice Ball");
+                GameObject iceBall = Instantiate(iceProjectilePrefab, playerTransform.position, Quaternion.Euler(0, 0, playerTransform.rotation.eulerAngles.z));
+                iceBall.GetComponent<Projectile>().Shoot(transform.up, 5f, false, 0, false);
+                if (fireCount == 2)
+                {
+                    iceBall.transform.localScale = new Vector3(1.5f, 1.5f, 1f);
+                    iceBall.GetComponent<IceBall>().SetupSize(2);
+                    iceBall.GetComponent<IceBall>().damage = 10f;
+                }
+                else
+                {
+                    iceBall.GetComponent<IceBall>().SetupSize(1);
+                    iceBall.GetComponent<IceBall>().damage = 5f;
+                }
+            }
+            else
+            {
+                Debug.Log("Ice Spray");
+                // Instantiate the ice spell
+                GameObject iceSpell = Instantiate(iceSprayPrefab, playerTransform.position, playerTransform.rotation);
+                if (iceCount == 1)
+                {
+                    iceSpell.transform.localScale = new Vector3(3f, 3.5f, 1f);
+                }
+                else if (iceCount == 2)
+                {
+                    iceSpell.transform.localScale = new Vector3(4.5f, 4f, 1f);
+                }
+                else if (iceCount == 3)
+                {
+                    iceSpell.transform.localScale = new Vector3(6f, 5f, 1f);
                 }
             }
         }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FirePuddle : MonoBehaviour
+public class FireWall : MonoBehaviour
 {
     [SerializeField] List<GameObject> enemies = new List<GameObject>();
     [SerializeField] List<float> puddleTimers = new List<float>();
@@ -31,7 +31,6 @@ public class FirePuddle : MonoBehaviour
         }
         
     }
-
 
     void OnTriggerEnter2D(Collider2D collision)
     {

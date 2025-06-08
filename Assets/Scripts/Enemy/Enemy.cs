@@ -9,6 +9,7 @@ public abstract class Enemy : MonoBehaviour
     public Rigidbody2D rb;
     public GameObject damageTextPrefab;
     [SerializeField] public float speed;
+    [SerializeField] public float currentSpeed;
     [SerializeField] public float health;
     [SerializeField] public float damage;
     [SerializeField] public bool isTakingKnockback;
@@ -85,9 +86,29 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
+    public void Slowed()
+    {
+        currentSpeed = speed * 0.5f; // Reduce speed by 50%
+        StopCoroutine(nameof(ResetSpeed));
+        StartCoroutine(nameof(ResetSpeed));
+    }
+
+    public void Freeze()
+    {
+        currentSpeed = 0; // Stop movement
+        StopCoroutine(nameof(ResetSpeed));
+        StartCoroutine(nameof(ResetSpeed));
+    }
+
+    IEnumerator ResetSpeed()
+    {
+        yield return new WaitForSeconds(1.5f); // Reset speed after 2 seconds
+        currentSpeed = speed; // Restore original speed
+    }
+
     public virtual void Die()
     {
-        speed = 0;
+        currentSpeed = 0;
         Destroy(gameObject);
     }
 }

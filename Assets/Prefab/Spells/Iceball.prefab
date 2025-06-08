@@ -11,12 +11,11 @@ GameObject:
   - component: {fileID: 9010288217724217015}
   - component: {fileID: 780961151621858641}
   - component: {fileID: 3721669687139843393}
-  - component: {fileID: 4370832784393444496}
   - component: {fileID: 533409236918560495}
   - component: {fileID: 8494367357199155411}
-  - component: {fileID: 2443036945425738903}
+  - component: {fileID: 1647697796834961267}
   m_Layer: 8
-  m_Name: Fireball
+  m_Name: Iceball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 154426786, guid: 52c422a07b6d916489721d4ab3bf7019, type: 3}
+  m_Sprite: {fileID: 1011762153, guid: ea620e434d8833543bbf6de706e73526, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -105,22 +104,6 @@ MonoBehaviour:
   isReflectable: 0
   damage: 0
   isEnemyProjectile: 0
---- !u!114 &4370832784393444496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4053801260894667784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8f722741f6239843a5c8da0d53c1821, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
-  level: 0
-  size: 0
-  explosionEffectPrefab: {fileID: 5090441155354973791, guid: 7e0b199c5c8f92b4ca460900d0cf7589, type: 3}
 --- !u!58 &533409236918560495
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -183,24 +166,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!95 &2443036945425738903
-Animator:
-  serializedVersion: 5
+--- !u!114 &1647697796834961267
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4053801260894667784}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 41825a2dfb8691e44b5bf6ca9ceb4ad8, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9de441a94f2db114baf084afae5ec35e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 5
+  level: 0
+  size: 1
+  explosionEffectPrefab: {fileID: 5090441155354973791, guid: a165ee8336f59044db83f1558082db25, type: 3}
