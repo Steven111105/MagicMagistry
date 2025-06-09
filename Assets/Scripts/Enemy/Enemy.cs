@@ -109,6 +109,7 @@ public abstract class Enemy : MonoBehaviour
     public virtual void Die()
     {
         currentSpeed = 0;
+        PlayerStats.enemiesKilled++;
         Destroy(gameObject);
     }
 }

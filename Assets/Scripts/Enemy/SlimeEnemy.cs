@@ -103,13 +103,13 @@ public class SlimeEnemy : Enemy
         if (size == 1)
         {
 
-            slime1.GetComponent<EnemySetup>().SetupSlimeEnemy(player, maxHealth / 2, speed, damage, moveDuration, moveCooldown, 0.5f);
-            slime2.GetComponent<EnemySetup>().SetupSlimeEnemy(player, maxHealth / 2, speed, damage, moveDuration, moveCooldown, 0.5f);
+            slime1.GetComponent<EnemySetup>().SetupSlimeEnemy(player, Mathf.CeilToInt(maxHealth / 2), speed, damage, moveDuration, moveCooldown, 0.5f);
+            slime2.GetComponent<EnemySetup>().SetupSlimeEnemy(player, Mathf.CeilToInt(maxHealth / 2), speed, damage, moveDuration, moveCooldown, 0.5f);
         }
         else
         {
-            slime1.GetComponent<EnemySetup>().SetupSlimeEnemy(player, maxHealth / 2, speed, damage, moveDuration, moveCooldown, size - 1);
-            slime2.GetComponent<EnemySetup>().SetupSlimeEnemy(player, maxHealth / 2, speed, damage, moveDuration, moveCooldown, size - 1);
+            slime1.GetComponent<EnemySetup>().SetupSlimeEnemy(player, Mathf.CeilToInt(maxHealth / 2), speed, damage, moveDuration, moveCooldown, size - 1);
+            slime2.GetComponent<EnemySetup>().SetupSlimeEnemy(player, Mathf.CeilToInt(maxHealth / 2), speed, damage, moveDuration, moveCooldown, size - 1);
         }
         
     }

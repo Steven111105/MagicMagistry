@@ -44,10 +44,7 @@ public class PlayerMovement : MonoBehaviour
                 playerAnim.isMoving = true;
             }
         }
-        else
-        {
-            rb.velocity = Vector2.zero; // Stop movement if not allowed
-        }
+
         Vector3 direction = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
         transform.localEulerAngles = new Vector3(0,0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f);
 

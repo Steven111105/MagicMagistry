@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerAnim : MonoBehaviour
 {
@@ -8,6 +8,10 @@ public class PlayerAnim : MonoBehaviour
     public bool isMoving = false;
     public bool isMovingLeft = false;
     SpriteRenderer sr;
+    [SerializeField] GameObject blackoutPanel;
+    [SerializeField] GameObject gameOverPanel;
+    [SerializeField] EnemySpawner enemySpawner;
+    bool hasShownGameOver = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,8 +51,30 @@ public class PlayerAnim : MonoBehaviour
 
     public void Die()
     {
+        if(hasShownGameOver) return;
+        hasShownGameOver = true;
+        StartCoroutine(Blackout());
         animator.SetTrigger("Die");
         // Disable player movement
-        transform.parent.GetComponent<PlayerMovement>().canMove = false;
+        Transform player = transform.parent;
+        player.GetComponent<PlayerMovement>().canMove = false;
+        player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        player.GetComponent<Collider2D>().enabled = false;
+        player.GetComponent<SpellChecker>().isDead = true;
+        enemySpawner.StopAllCoroutines();
+    }
+    
+    IEnumerator Blackout()
+    {
+        blackoutPanel.SetActive(true);
+        float timer = 0;
+        while (timer < 1.5f)
+        {
+            timer += Time.deltaTime;
+            blackoutPanel.GetComponent<Image>().color = new Color(0, 0, 0, timer);
+            yield return null;
+        }
+        blackoutPanel.GetComponent<Image>().color = new Color(0, 0, 0, 1);
+        gameOverPanel.GetComponent<GameOverScript>().ShowResult();
     }
 }
