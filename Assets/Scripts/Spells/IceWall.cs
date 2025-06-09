@@ -12,7 +12,7 @@ public class IceWall : MonoBehaviour
             if (enemy != null)
             {
                 // Apply damage to the enemy
-                enemy.Slowed();
+                enemy.Freeze();
             }
         }
     }
@@ -24,7 +24,7 @@ public class IceWall : MonoBehaviour
             if (enemy != null)
             {
                 // Apply damage to the enemy
-                enemy.Slowed();
+                enemy.Freeze();
             }
         }
     }

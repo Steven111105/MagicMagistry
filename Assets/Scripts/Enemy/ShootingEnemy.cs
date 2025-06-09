@@ -12,8 +12,7 @@ public class ShootingEnemy : Enemy
     bool isWaiting = false;
     public override void OnEnable()
     {
-        sr = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
+        base.OnEnable();
         //basically get closer to the player, not just on the edge of range
         approachRange = shootingRange * 0.6f;
         bulletDamage = damage;

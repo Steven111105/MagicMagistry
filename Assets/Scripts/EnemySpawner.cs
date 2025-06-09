@@ -40,7 +40,7 @@ public class EnemySpawner : MonoBehaviour
             enemy.GetComponent<EnemySetup>().SetupEnemy(enemyType);
         }
         int slimeCount = waveNumber / 5;
-        // slimeCount = 1;
+        slimeCount = 1;
         for (int i = 0; i < slimeCount; i++)
         {
             Vector2 spawnPos = (Vector2)player.position + Random.insideUnitCircle.normalized * spawnRange;

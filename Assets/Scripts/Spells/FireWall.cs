@@ -9,7 +9,8 @@ public class FireWall : MonoBehaviour
 
     void OnEnable()
     {
-        StartCoroutine(RemovePuddle());
+        GetComponent<SpriteRenderer>().color = new Color(0.9372549020f, 0.4117647059f, 0.3686274510f, 1f);
+        StartCoroutine(RemoveWall());
     }
 
     void Update()
@@ -32,7 +33,7 @@ public class FireWall : MonoBehaviour
         
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.gameObject.CompareTag("Enemy"))
         {
@@ -44,7 +45,7 @@ public class FireWall : MonoBehaviour
         
     }
 
-    void OnTriggerExit2D(Collider2D collision)
+    void OnCollisionExit2D(Collision2D collision)
     {
         if(!collision.gameObject.CompareTag("Enemy"))
         {
@@ -58,9 +59,9 @@ public class FireWall : MonoBehaviour
         }
     }
 
-    IEnumerator RemovePuddle()
+    IEnumerator RemoveWall()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
         enemies.Clear();
         puddleTimers.Clear();
         Destroy(gameObject);

@@ -13,8 +13,7 @@ public class SlimeEnemy : Enemy
     // Start is called before the first frame update
     public override void OnEnable()
     {
-        sr = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
+        base.OnEnable();
         StartCoroutine(MoveCooldown());
     }
 
@@ -83,6 +82,12 @@ public class SlimeEnemy : Enemy
         }
 
         Destroy(gameObject, 0.5f);
+    }
+
+    public override void ShowDamageText(float damage)
+    {
+        base.ShowDamageText(damage);
+        transform.GetChild(0).localScale = new Vector2(0.02f / size, 0.02f / size);
     }
 
     void Split()

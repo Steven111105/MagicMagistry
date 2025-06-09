@@ -45,7 +45,7 @@ public abstract class Enemy : MonoBehaviour
         StartCoroutine(DamageFlash());
     }
 
-    void ShowDamageText(float damage)
+    public virtual void ShowDamageText(float damage)
     {
         GameObject damageText = Instantiate(damageTextPrefab,Vector2.zero, Quaternion.identity, transform.GetChild(0));
         damageText.GetComponent<TMP_Text>().text = damage.ToString();

@@ -24,7 +24,7 @@ public class FirePuddle : MonoBehaviour
                 i--; // Adjust index after removal
             }
             puddleTimers[i] += Time.deltaTime;
-            if (puddleTimers[i] > 0.3f)
+            if (puddleTimers[i] > 0.5f)
             {
                 enemies[i].GetComponent<Enemy>()?.TakeDamage(damage);
                 puddleTimers[i] = 0f; // Reset timer after damage

@@ -15,9 +15,11 @@ public class IceBall : MonoBehaviour
         {
             case 1:
                 this.size = 1f;
+                damage = 5f;
                 break;
             case 2:
                 this.size = 1.5f;
+                damage = 10f;
                 break;
             default:
                 Debug.Log("Invalid size level for iceball: " + level);
@@ -28,7 +30,7 @@ public class IceBall : MonoBehaviour
     private void OnDestroy()
     {
         //create a fire explosion effect when the fireball is destroyed using physics overlap circle
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, size+1);
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, size+2);
         foreach (Collider2D hitCollider in hitColliders)
         {
             if (hitCollider.CompareTag("Enemy"))
@@ -39,6 +41,6 @@ public class IceBall : MonoBehaviour
             }
         }
         GameObject explosion = Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
-        explosion.transform.localScale = new Vector3(size+1, size+1, 1);
+        explosion.transform.localScale = new Vector3(size+2, size+2, 1);
     }
 }

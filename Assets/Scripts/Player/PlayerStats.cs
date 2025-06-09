@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,12 @@ public class PlayerStats : MonoBehaviour
     public float reflectDamage = 1f;
     public float attackSpeed = 1f;
     bool allowRegen = false;
+    PlayerAnim playerAnim;
+
+    void OnEnable()
+    {
+        playerAnim = transform.GetChild(0).GetComponent<PlayerAnim>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -29,18 +36,15 @@ public class PlayerStats : MonoBehaviour
         expBar.value = exp; // Set initial value for experience bar
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void TakeDamage(float damage){
         allowRegen = false;
         health -= damage;
         healthBar.value = health / maxHealth;
-        if(health <= 0){
+        if (health <= 0)
+        {
             Debug.Log("Player is dead");
+            playerAnim.Die();
+            GetComponent<PlayerMovement>().canMove = false;
         }
         Invoke(nameof(AllowRegen), 3f);
     }

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class WallScript : MonoBehaviour
 {
-    void OnEnable()
+    public void SpawnWall(float duration)
     {
-        StartCoroutine(RemoveSlash());
+        StartCoroutine(RemoveWall(duration));
     }
 
-    IEnumerator RemoveSlash()
+    IEnumerator RemoveWall(float duration)
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(duration);
         Destroy(gameObject);
     }
 }

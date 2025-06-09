@@ -13,6 +13,7 @@ public class PlayerDash : MonoBehaviour
     public bool canDash;
     public bool isDashing;
     Vector2 movement;
+    PlayerAnim playerAnim;
     private void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
@@ -20,6 +21,7 @@ public class PlayerDash : MonoBehaviour
         canDash = true;
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("EnemyProjectile"), false);
+        playerAnim = transform.GetChild(0).GetComponent<PlayerAnim>();
     }
 
     void Update()
@@ -35,7 +37,8 @@ public class PlayerDash : MonoBehaviour
         }
     }
 
-    void Dash(){
+    void Dash()
+    {
         canDash = false;
         isDashing = true;
         playerMovement.canMove = false;
@@ -44,14 +47,17 @@ public class PlayerDash : MonoBehaviour
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("EnemyProjectile"), true);
         Invoke("StopDash", dashLength);
         Invoke("DashCooldown", dashCooldown);
+        playerAnim.TriggerDashAnimation();
     }
 
-    void StopDash(){
+    void StopDash()
+    {
         rb.velocity = Vector2.zero;
         playerMovement.canMove = true;
         isDashing = false;
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("EnemyProjectile"), false);
+        playerAnim.StopDashAnimation();
     }
 
     void DashCooldown(){
