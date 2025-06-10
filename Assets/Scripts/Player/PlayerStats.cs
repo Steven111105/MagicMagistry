@@ -57,7 +57,7 @@ public class PlayerStats : MonoBehaviour
 
     IEnumerator RegenHP(){
         while(allowRegen){
-            health += 0.2f;
+            health += 0.1f;
             if(health >= maxHealth)
             {
                 health = maxHealth; // Cap health at maxHealth
@@ -65,7 +65,7 @@ public class PlayerStats : MonoBehaviour
                 yield break; // Stop regenerating if health is full
             }
             healthBar.value = health / maxHealth;
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.5f);
         }
     }
 }

@@ -136,12 +136,12 @@ public class SpellCaster : MonoBehaviour
                     if (fireCount == 2)
                     {
                         firePuddle.transform.localScale = new Vector3(2.5f, 2.5f, 1f);
-                        firePuddle.GetComponent<FirePuddle>().damage = 2;
+                        firePuddle.GetComponent<FirePuddle>().damage = 1;
                     }
                     else if (fireCount == 3)
                     {
                         firePuddle.transform.localScale = new Vector3(3.5f, 3.5f, 1f);
-                        firePuddle.GetComponent<FirePuddle>().damage = 3;
+                        firePuddle.GetComponent<FirePuddle>().damage = 2;
                     }
                 }
                 else
@@ -201,7 +201,7 @@ public class SpellCaster : MonoBehaviour
                 else if (iceCount == 3)
                 {
                     iceSpell.transform.localScale = new Vector3(6f, 5f, 1f);
-                    iceSpell.GetComponent<IceSpray>().damage = 10f;
+                    iceSpell.GetComponent<IceSpray>().damage = 7f;
                 }
             }
         }

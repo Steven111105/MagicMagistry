@@ -22,7 +22,7 @@ public class EnemySetup : MonoBehaviour
                 break;
             case 1:
                 sprite = spawner.shootingEnemySprite;
-                health = 3 + (waveNumber * 1.2f);
+                health = 3 + Mathf.Round(waveNumber * 1.2f);
                 speed = 2;
                 damage = 3 + (waveNumber / 5);
                 float shootingRange = 12f;

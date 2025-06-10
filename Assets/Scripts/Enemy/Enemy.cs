@@ -88,7 +88,7 @@ public abstract class Enemy : MonoBehaviour
 
     public void Slowed()
     {
-        currentSpeed = speed * 0.5f; // Reduce speed by 50%
+        currentSpeed = speed * 0.25f; // Reduce speed by 50%
         StopCoroutine(nameof(ResetSpeed));
         StartCoroutine(nameof(ResetSpeed));
     }
@@ -96,14 +96,20 @@ public abstract class Enemy : MonoBehaviour
     public void Freeze()
     {
         currentSpeed = 0; // Stop movement
-        StopCoroutine(nameof(ResetSpeed));
-        StartCoroutine(nameof(ResetSpeed));
+        StopCoroutine(nameof(ResetFreeze));
+        StartCoroutine(nameof(ResetFreeze));
     }
 
     IEnumerator ResetSpeed()
     {
         yield return new WaitForSeconds(1.5f); // Reset speed after 2 seconds
         currentSpeed = speed; // Restore original speed
+    }
+
+    IEnumerator ResetFreeze()
+    {
+        yield return new WaitForSeconds(1f); // Reset speed after 2 seconds
+        Slowed();
     }
 
     public virtual void Die()

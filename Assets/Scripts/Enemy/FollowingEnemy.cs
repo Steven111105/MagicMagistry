@@ -44,6 +44,20 @@ public class FollowingEnemy : Enemy
         }
     }
 
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if(canAttack){ 
+                // Debug.Log("Enemy collided with player");
+                collision.gameObject.GetComponent<PlayerStats>()?.TakeDamage(damage);
+                canAttack = false;
+                rb.velocity = Vector2.zero; // Stop the enemy's movement
+                Invoke(nameof(AllowAttack), attackCooldown);
+            }
+        }
+    }
+
     void AllowAttack()
     {
         canAttack = true;

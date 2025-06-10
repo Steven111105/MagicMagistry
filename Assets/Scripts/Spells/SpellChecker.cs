@@ -4,6 +4,8 @@ using TMPro;
 
 public class SpellChecker : MonoBehaviour
 {
+    public GameObject canvasObject;
+    public GameObject fullSpellTextPrefab;
     public TMP_Text spellText;
     private List<string> inputSequence = new List<string>();
     private List<string> currentComponents = new List<string>();
@@ -140,6 +142,9 @@ public class SpellChecker : MonoBehaviour
     
     void ShowFullSpellUI()
     {
+        GameObject text = Instantiate(fullSpellTextPrefab, spellText.transform.position, Quaternion.identity, spellText.transform);
+        text.GetComponent<TMP_Text>().text = "Spell Slot is Full!";
+        text.transform.localPosition = new Vector3(0f, 200f, 0f);
         return;
     }
 }
