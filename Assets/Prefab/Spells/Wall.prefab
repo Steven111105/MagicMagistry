@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6744818705542996491}
   - component: {fileID: -3668668218026337255}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Wall
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1983864848, guid: ea620e434d8833543bbf6de706e73526, type: 3}
-  m_Color: {r: 0.91823894, g: 0.74076056, b: 0.61504674, a: 1}
+  m_Sprite: {fileID: 1409658246, guid: 40e3f52db817e184ba97051d26e6f2b7, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

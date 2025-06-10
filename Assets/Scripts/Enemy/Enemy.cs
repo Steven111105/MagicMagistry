@@ -28,6 +28,10 @@ public abstract class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage, Transform source = null, float knockbackForce = 0)
     {
+        if(damage <= 0)
+        {
+            return;
+        }
         if (source != null)
         {
             // Debug.Log("Knockback from " + source.name);

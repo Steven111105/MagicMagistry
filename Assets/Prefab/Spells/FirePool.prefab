@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 121925f62fe1b6b4499985279f5ef8e1, type: 3}
+  m_Sprite: {fileID: -919914519, guid: 4e3fbf6f973009749a884521dc06293d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemies: []
   puddleTimers: []
+  damage: 0
 --- !u!58 &6722642724266215751
 CircleCollider2D:
   m_ObjectHideFlags: 0

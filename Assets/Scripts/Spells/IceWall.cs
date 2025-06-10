@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class IceWall : MonoBehaviour
 {
-     void OnCollisionStay2D(Collision2D collision)
+    void OnEnable()
     {
-        if(collision.gameObject.CompareTag("Enemy"))
+        GetComponent<SpriteRenderer>().color = new Color(0.3742138f, 1f, 0.949218f, 1f);
+        StartCoroutine(RemoveWall());
+    }
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             if (enemy != null)
@@ -18,7 +23,7 @@ public class IceWall : MonoBehaviour
     }
     void OnCollisionExit2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             if (enemy != null)
@@ -28,9 +33,10 @@ public class IceWall : MonoBehaviour
             }
         }
     }
-
-    public void DestroySelf()
+    
+    IEnumerator RemoveWall()
     {
+        yield return new WaitForSeconds(5f);
         Destroy(gameObject);
     }
 }

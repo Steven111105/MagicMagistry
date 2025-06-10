@@ -100,6 +100,21 @@ public class SpellCaster : MonoBehaviour
                         puddle.GetComponent<FirePuddle>().damage = 2;
                     }
                 }
+
+                if (iceCount >= 1)
+                {
+                    // Debug.Log("Adding Ice Effect to Wall(1 ice)");
+                    // Add ice effect to the wall
+                    wall.AddComponent<IceWall>();
+                    if (iceCount == 2)
+                    {
+                        // Debug.Log("2 ice walls");
+                        GameObject puddle = Instantiate(fireIcePoolPrefab, wall.transform.position, wall.transform.rotation);
+                        puddle.GetComponent<SpriteRenderer>().enabled = false;
+                        puddle.GetComponent<FireIcePuddle>().damage = 0;
+                        puddle.transform.localScale = new Vector3(2.5f, 2.5f, 1f);
+                    }
+                }
             }
 
             

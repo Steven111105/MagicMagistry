@@ -17,14 +17,14 @@ public class EnemySetup : MonoBehaviour
                 sprite = spawner.chaseEnemySprite;
                 float health = 5 + Mathf.CeilToInt(waveNumber * 1.3f);
                 float speed = 3;
-                float damage = 1 + (waveNumber / 5);
+                float damage = 2;
                 SetupChaseEnemy(spawner.player, health, speed, damage);
                 break;
             case 1:
                 sprite = spawner.shootingEnemySprite;
                 health = 3 + Mathf.Round(waveNumber * 1.2f);
                 speed = 2;
-                damage = 3 + (waveNumber / 5);
+                damage = 3;
                 float shootingRange = 12f;
                 float shootingCooldown = 1f;
                 float bulletSpeed = 6f;
@@ -34,7 +34,7 @@ public class EnemySetup : MonoBehaviour
                 sprite = spawner.slimeEnemySprite;
                 health = 10 + waveNumber;
                 speed = 3f;
-                damage = 5 + (waveNumber / 5);
+                damage = 5;
                 float moveDuration = 0.5f;
                 float moveCooldown = 0.5f;
                 SetupSlimeEnemy(spawner.player, health, speed, damage, moveDuration, moveCooldown, 2);

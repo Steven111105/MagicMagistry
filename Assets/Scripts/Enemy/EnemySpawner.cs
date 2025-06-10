@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -15,11 +16,13 @@ public class EnemySpawner : MonoBehaviour
     public GameObject damageTextPrefab;
     public float spawnRange = 15f;
     public List<GameObject> enemies = new List<GameObject>();
+    public TMP_Text waveText;
+    public bool isSpawning = false;
     // Start is called before the first frame update
     void Start()
     {
         waveNumber = 0;
-        Invoke(nameof(StartWave),3f);
+        Invoke(nameof(StartWave), 3f);
     }
 
     // Update is called once per frame
@@ -32,42 +35,45 @@ public class EnemySpawner : MonoBehaviour
                 enemies.RemoveAt(i);
                 i--;
             }
-
         }
-        if(enemies.Count == 0 && !IsInvoking(nameof(StartWave))){
+
+        if (enemies.Count == 0 && !IsInvoking(nameof(StartWave)))
+        {
             StopCoroutine(WaveTimer());
             Debug.Log("All enemies defeated, starting next wave in 2 seconds...");
             Invoke(nameof(StartWave), 2f);
+            isSpawning = true;
         }
     }
 
-    void StartWave(){
+    void StartWave()
+    {
         waveNumber++;
+        waveText.gameObject.SetActive(true);
+        StartCoroutine(HideWaveText());
+        waveText.text = "Wave " + waveNumber;
         Debug.Log("Starting wave " + waveNumber);
         int enemyCount = Mathf.RoundToInt(waveNumber * 1.5f);
-        // int enemyCount = 0;
         for (int i = 0; i < enemyCount; i++)
         {
-            // Vector2 spawnPos = (Vector2)player.position + Random.insideUnitCircle.normalized * spawnRange;
             Vector2 spawnPos = new Vector2(Random.Range(-18.5f, 18.5f), Random.Range(-19.5f, 19.5f));
-            while (Vector2.Distance(spawnPos, player.position) < 7f)
+            while (Vector2.Distance(spawnPos, player.position) < 10f)
             {
                 spawnPos = new Vector2(Random.Range(-18.5f, 18.5f), Random.Range(-19.5f, 19.5f));
             }
             GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
             enemies.Add(enemy);
-            // int enemyType = Random.Range(0, 2);
-            int enemyType = 1;
+            int enemyType = Random.Range(0, 2);
+            // int enemyType = 1;
             enemy.GetComponent<EnemySetup>().spawner = this;
             enemy.GetComponent<EnemySetup>().SetupEnemy(enemyType);
         }
+
         int slimeCount = waveNumber / 5;
-        // int slimeCount = 1;
         for (int i = 0; i < slimeCount; i++)
         {
-            // Vector2 spawnPos = (Vector2)player.position + Random.insideUnitCircle.normalized * spawnRange;
             Vector2 spawnPos = new Vector2(Random.Range(-18.5f, 18.5f), Random.Range(-19.5f, 19.5f));
-            while (Vector2.Distance(spawnPos, player.position) < 7f)
+            while (Vector2.Distance(spawnPos, player.position) < 10f)
             {
                 spawnPos = new Vector2(Random.Range(-18.5f, 18.5f), Random.Range(-19.5f, 19.5f));
             }
@@ -76,16 +82,25 @@ public class EnemySpawner : MonoBehaviour
             enemy.GetComponent<EnemySetup>().spawner = this;
             enemy.GetComponent<EnemySetup>().SetupEnemy(2); // Assuming 2 is the type for SlimeEnemy
         }
+        isSpawning = false;
         StartCoroutine(WaveTimer());
     }
 
-    IEnumerator WaveTimer(){
+    IEnumerator WaveTimer()
+    {
         roundTimer = 0;
-        while(roundTimer < 7*waveNumber + 15f){
+        while (roundTimer < 7 * waveNumber + 15f)
+        {
             roundTimer += Time.deltaTime;
             yield return null;
         }
         Debug.Log("Wave " + waveNumber + " ended");
         StartWave();
+    }
+    
+    IEnumerator HideWaveText()
+    {
+        yield return new WaitForSeconds(2f);
+        waveText.gameObject.SetActive(false);
     }
 }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4e3fbf6f973009749a884521dc06293d
+guid: 40e3f52db817e184ba97051d26e6f2b7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -82,19 +82,6 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -119,17 +106,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Red Effect Bullet Impact Explosion 32x32_0
+      name: Rocks_0
       rect:
         serializedVersion: 2
-        x: 544
-        y: 96
-        width: 32
-        height: 32
+        x: 16
+        y: 144
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8740791cc295da341bfe1a776eabbc12
-      internalID: 105135735
+      spriteID: abcd44a26176b6a458cdd81bb53d7c45
+      internalID: 1409658246
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Red Effect Bullet Impact Explosion 32x32_1
+      name: Rocks_1
       rect:
         serializedVersion: 2
-        x: 352
-        y: 192
-        width: 32
-        height: 32
+        x: 16
+        y: 176
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,8 +158,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa5c3575938433246b3d731fcb7c2804
-      internalID: -919914519
+      spriteID: 591570c6056f59140a45fccac355fd2b
+      internalID: -632779211
       vertices: []
       indices: 
       edges: []
@@ -175,8 +175,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Red Effect Bullet Impact Explosion 32x32_0: 105135735
-      Red Effect Bullet Impact Explosion 32x32_1: -919914519
+      Rocks_0: 1409658246
+      Rocks_1: -632779211
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

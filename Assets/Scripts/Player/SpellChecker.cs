@@ -9,7 +9,6 @@ public class SpellChecker : MonoBehaviour
     public TMP_Text spellText;
     private List<string> inputSequence = new List<string>();
     private List<string> currentComponents = new List<string>();
-
     private string confirmCode = "RL";
     private string cancelCode = "RR";
     private Dictionary<string, string> spellBook = new Dictionary<string, string>()
@@ -21,12 +20,16 @@ public class SpellChecker : MonoBehaviour
     };
 
     public bool isDead = false;
+    AudioSource audioSource;
+    [SerializeField] AudioClip castSFX;
+    [SerializeField] AudioClip addSpellSFX;
     void OnEnable()
     {
         isDead = false;
         spellText.text = "";
         inputSequence.Clear();
         currentComponents.Clear();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -88,6 +91,7 @@ public class SpellChecker : MonoBehaviour
                     spellText.text += " " + spell.Key + " ";
                     // Debug.Log("Added component: " + spell.Key);
                     inputSequence.Clear();
+                    audioSource.PlayOneShot(addSpellSFX);
                     return;
                 }
                 else
@@ -127,7 +131,6 @@ public class SpellChecker : MonoBehaviour
             Debug.Log("No components to cast!");
             spellText.text = "";
             currentComponents.Clear();
-
             return;
         }
 
@@ -135,6 +138,7 @@ public class SpellChecker : MonoBehaviour
         // Debug.Log("Casting spell: " + fullSpell);
 
         GetComponent<SpellCaster>().CastSpell(currentComponents);
+        audioSource.PlayOneShot(castSFX);
 
         spellText.text = "";
         currentComponents.Clear();
