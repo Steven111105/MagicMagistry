@@ -55,14 +55,14 @@ public class SpellChecker : MonoBehaviour
         // First, check if the input is the Confirm code
         if (currentInput == confirmCode)
         {
-            Debug.Log("Confirmed");
+            // Debug.Log("Confirmed");
             ConfirmSpell();
             inputSequence.Clear();
             return;
         }
         else if (currentInput == cancelCode)
         {
-            Debug.Log("Cancelled");
+            // Debug.Log("Cancelled");
             spellText.text = "";
             currentComponents.Clear();
             inputSequence.Clear();
@@ -86,7 +86,7 @@ public class SpellChecker : MonoBehaviour
                         spellText.text += " + ";
                     }
                     spellText.text += " " + spell.Key + " ";
-                    Debug.Log("Added component: " + spell.Key);
+                    // Debug.Log("Added component: " + spell.Key);
                     inputSequence.Clear();
                     return;
                 }
@@ -132,7 +132,7 @@ public class SpellChecker : MonoBehaviour
         }
 
         string fullSpell = string.Join(" + ", currentComponents);
-        Debug.Log("Casting spell: " + fullSpell);
+        // Debug.Log("Casting spell: " + fullSpell);
 
         GetComponent<SpellCaster>().CastSpell(currentComponents);
 

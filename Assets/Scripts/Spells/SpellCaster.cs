@@ -39,7 +39,7 @@ public class SpellCaster : MonoBehaviour
         {
             List<GameObject> walls = new List<GameObject>();
             //Create shield pillar, then change the element accordingly
-            Debug.Log("Casting Shield Pillar");
+            // Debug.Log("Casting Shield Pillar");
             // Add logic to create a shield pillar without move effect
             //create 3 shield pillars in a row in front of player
             GameObject shieldPillar = Instantiate(wallSpellPrefab, playerTransform.position + playerTransform.up * 1.5f, playerTransform.rotation);
@@ -89,12 +89,12 @@ public class SpellCaster : MonoBehaviour
                 wall.transform.rotation = Quaternion.identity;
                 if (fireCount >= 1)
                 {
-                    Debug.Log("Adding Fire Effect to Wall(1 fire)");
+                    // Debug.Log("Adding Fire Effect to Wall(1 fire)");
                     // Add fire effect to the wall
                     wall.AddComponent<FireWall>();
                     if (fireCount == 2)
                     {
-                        Debug.Log("2 fire walls");
+                        // Debug.Log("2 fire walls");
                         GameObject puddle = Instantiate(firePoolPrefab, wall.transform.position, wall.transform.rotation);
                         puddle.transform.localScale = new Vector3(2.5f, 2.5f, 1f);
                         puddle.GetComponent<FirePuddle>().damage = 2;
@@ -248,7 +248,7 @@ public class SpellCaster : MonoBehaviour
         else if (iceCount > 0) baseSpell = "Ice";
         else if (moveCount > 0) baseSpell = "Move";
 
-        Debug.Log("Base Spell: " + baseSpell);
+        // Debug.Log("Base Spell: " + baseSpell);
     }
     
 

@@ -20,6 +20,11 @@ public class SlimeEnemy : Enemy
     // Update is called once per frame
     void Update()
     {
+        if (sr.enabled == false)
+        {
+            Destroy(gameObject);
+            return; // Exit if the sprite renderer is disabled
+        }
         if (!isTakingKnockback)
         {
             if (canAttack)
@@ -78,10 +83,14 @@ public class SlimeEnemy : Enemy
     {
         if (size != 0.5f)
         {
-            Invoke(nameof(Split), 0.45f);
+            Invoke(nameof(Split), 0.3f);
         }
-
-        Destroy(gameObject, 0.5f);
+        else
+        {
+            Destroy(gameObject);
+            PlayerStats.enemiesKilled++;
+            Debug.Log("SlimeEnemy died");
+        }
     }
 
     public override void ShowDamageText(float damage)
@@ -98,11 +107,12 @@ public class SlimeEnemy : Enemy
         }
         GameObject slime1 = Instantiate(gameObject, transform.position + transform.right * 0.1f, Quaternion.identity);
         GameObject slime2 = Instantiate(gameObject, transform.position + transform.right * 0.1f, Quaternion.identity);
+        spawner.enemies.Add(slime1);
+        spawner.enemies.Add(slime2);
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
         sr.enabled = false;
         if (size == 1)
         {
-
             slime1.GetComponent<EnemySetup>().SetupSlimeEnemy(player, Mathf.CeilToInt(maxHealth / 2), speed, damage, moveDuration, moveCooldown, 0.5f);
             slime2.GetComponent<EnemySetup>().SetupSlimeEnemy(player, Mathf.CeilToInt(maxHealth / 2), speed, damage, moveDuration, moveCooldown, 0.5f);
         }
@@ -111,7 +121,7 @@ public class SlimeEnemy : Enemy
             slime1.GetComponent<EnemySetup>().SetupSlimeEnemy(player, Mathf.CeilToInt(maxHealth / 2), speed, damage, moveDuration, moveCooldown, size - 1);
             slime2.GetComponent<EnemySetup>().SetupSlimeEnemy(player, Mathf.CeilToInt(maxHealth / 2), speed, damage, moveDuration, moveCooldown, size - 1);
         }
-        
+        Destroy(gameObject);
     }
 
     void OnCollisionEnter2D(Collision2D collision)

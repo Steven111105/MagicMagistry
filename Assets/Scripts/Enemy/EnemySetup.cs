@@ -43,12 +43,13 @@ public class EnemySetup : MonoBehaviour
                 Debug.LogError("Invalid enemy type");
                 break;
         }
+        GetComponent<Enemy>().spawner = spawner;
         GetComponent<SpriteRenderer>().sprite = sprite;
     }
     public void SetupChaseEnemy(Transform player, float health, float speed, float damage)
     {
-        gameObject.AddComponent<FollowingEnemy>();
-        Enemy enemy = gameObject.GetComponent<FollowingEnemy>();
+        
+        Enemy enemy = gameObject.AddComponent<FollowingEnemy>();
         // enemy.sr.color = Color.blue;
         enemy.player = player;
         enemy.health = health;
@@ -61,8 +62,7 @@ public class EnemySetup : MonoBehaviour
     public void SetupShootingEnemy(Transform player, float health, float speed, float damage,
                                 float shootingRange, float shootingCooldown, float bulletSpeed)
     {
-        gameObject.AddComponent<ShootingEnemy>();
-        ShootingEnemy enemy = gameObject.GetComponent<ShootingEnemy>();
+        ShootingEnemy enemy = gameObject.AddComponent<ShootingEnemy>();
         // enemy.sr.color = Color.green;
         enemy.player = player;
         enemy.health = health;
@@ -99,5 +99,6 @@ public class EnemySetup : MonoBehaviour
         transform.localScale = new Vector3(size, size, 1); // Scale the enemy object
         enemy.damageTextPrefab = spawner.damageTextPrefab;
         enemy.currentSpeed = speed;
+        enemy.spawner = spawner;
     }
 }

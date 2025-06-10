@@ -17,7 +17,7 @@ public abstract class Enemy : MonoBehaviour
     [Tooltip("0.3 is 30% kb resistance")]
     [SerializeField] public float knockbackResistance = 0.5f; 
     [SerializeField] protected bool flashing = false;
-
+    public EnemySpawner spawner;
     public virtual void OnEnable()
     {
         sr = GetComponent<SpriteRenderer>();
