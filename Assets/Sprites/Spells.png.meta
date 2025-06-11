@@ -358,7 +358,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 176
+        y: 175
         width: 16
         height: 16
       alignment: 0
@@ -379,7 +379,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 176
+        y: 175
         width: 16
         height: 16
       alignment: 0
@@ -400,7 +400,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 176
+        y: 175
         width: 16
         height: 16
       alignment: 0
@@ -421,7 +421,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 176
+        y: 175
         width: 16
         height: 16
       alignment: 0
@@ -496,6 +496,48 @@ TextureImporter:
       bones: []
       spriteID: fc39666b02d61ea41b81a62311bfa6a1
       internalID: 1424976751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spells_0
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 3, y: 3, z: 3, w: 3}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6137c2a878f24024282809352423f3ed
+      internalID: 1999666021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spells_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96727cccaebb7ec459cbc22e871506b3
+      internalID: 775257488
       vertices: []
       indices: 
       edges: []
