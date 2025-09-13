@@ -1,3 +1,11 @@
+<p align="center"><img img width="900" height="564" src="https://github.com/user-attachments/assets/af32106d-38c3-415a-9b44-81e0c9be9213" xalign="mid"></p>
+<!---
+https://github.com/user-attachments/assets/af32106d-38c3-415a-9b44-81e0c9be9213
+https://github.com/user-attachments/assets/ceceaae4-070b-4ca7-8d82-cf24c2b5ca50
+--->
+
+<br>
+
 ## About
 Magic Magistry is a spellcasting survival game. Combine different spell components to fight off the horde of enemies and survive for as long as you can.
 
@@ -26,7 +34,7 @@ RR to cancel spell
 | `Spells`| The spells folder has all the scripts for all the different spells. It usually had data about damage, effects (like slowing down enemies), timer function, OnHit, etc|
 |`Enemy.cs`| This script is the base for all the other enemies. It has functions about movement, taking damage, etc. 
 |`Enemy`| The folder has all the different enemy scripts that inherits `Enemy.cs`. Each enemy has each their own ways to deal damage to the player and making it inherit the enemy class is easier to implement for additional enemies in the future|
-|`FollowPlayer.cs`| Script for camera to follow player but clamped to not show the edge of the map|
+|`FollowPlayer.cs`| Script for camera to follow player|
 
 ## Contributors
 Steven Wijaya (Me) - Game Programmer
