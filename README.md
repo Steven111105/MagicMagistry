@@ -30,3 +30,17 @@ RR to cancel spell
 
 ## Contributors
 Steven Wijaya (Me) - Game Programmer
+
+Assets Used:
+
+https://bdragon1727.itch.io/free-effect-bullet-impact-explosion-32x32
+
+https://enjl.itch.io/tileset-top-down-dungeon
+
+https://www.dafont.com/pixelsix.font 
+
+https://xenophero.itch.io/rock-sprites 
+
+https://pixabay.com/sound-effects/swish-swoosh-woosh-sfx-17-357183/
+
+https://pixabay.com/sound-effects/trinkets-69217/ 
